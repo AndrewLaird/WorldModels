@@ -96,6 +96,8 @@ if __name__ == "__main__":
                 
 
         data = torch.Tensor(data).view(-1,27648)
+        # normalize the data between 0,1 not 0,255
+        data = data /255
         print((data != data).any())
         print(data)
         for x in range(1):
