@@ -50,7 +50,7 @@ def loss_function(recon_x, x, mu, logvar):
 
     loss = BCE + KLD
 
-    return loss.clamp(min=-100,max=100)
+    return loss
 
 def create_VAE():
     vae = VAE()
@@ -90,16 +90,11 @@ if __name__ == "__main__":
 
             if(done):
                 obs = env.reset()
-            else:
-                env.render()
-            x+= 1
                 
 
         data = torch.Tensor(data).view(-1,27648)
         # normalize the data between 0,1 not 0,255
-        data = data /255
-        print((data != data).any())
-        print(data)
+        data = data / 255
         for x in range(1):
             vae_update(data,vae,vae_optimizer)
 
